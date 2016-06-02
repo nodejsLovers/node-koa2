@@ -5,7 +5,18 @@ router.get('/', async function (ctx, next) {
     title: 'koa2 title'
   };
 
-  await ctx.render('index', {
+  var p1 = new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve("hello");
+    }, 3000)
   });
-})
+  //异步转同步写法， await 期待一个promise 对象。
+  var test=await p1;
+
+  await ctx.render('index', {
+    test: test
+  });
+});
+
+
 module.exports = router;
